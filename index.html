@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Área Segura</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#050816;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:#111827;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 20px #00ffff55;
+width:300px;
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+outline:none;
+}
+
+button{
+margin-top:10px;
+padding:10px;
+width:100%;
+border:none;
+border-radius:10px;
+background:#00ffff;
+cursor:pointer;
+font-weight:bold;
+}
+
+#content{
+display:none;
+padding:20px;
+}
+
+.script-box{
+background:#1f2937;
+padding:15px;
+border-radius:10px;
+margin-top:10px;
+white-space:pre-wrap;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box" id="loginBox">
+<h2>🔐 Área Protegida</h2>
+<p>Digite a senha</p>
+
+<input type="password" id="senha" placeholder="Senha...">
+<button onclick="entrar()">Entrar</button>
+
+<p id="erro" style="color:red;"></p>
+</div>
+
+<div id="content">
+
+<h1>🔥 Meus Scripts</h1>
+
+<div class="script-box">
+print("Olá mundo")
+</div>
+
+<div class="script-box">
+local player = game.Players.LocalPlayer
+print(player.Name)
+</div>
+
+</div>
+
+<script>
+const SENHA = "1234"; // 🔑 muda aqui sua senha
+
+function entrar(){
+let input = document.getElementById("senha").value;
+
+if(input === SENHA){
+document.getElementById("loginBox").style.display = "none";
+document.getElementById("content").style.display = "block";
+}else{
+document.getElementById("erro").innerText = "Senha errada!";
+}
+}
+</script>
+
+</body>
+</html>
