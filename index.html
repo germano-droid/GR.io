@@ -2,7 +2,9 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Área Segura</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Script Vault</title>
 
 <style>
 body{
@@ -16,46 +18,76 @@ align-items:center;
 height:100vh;
 }
 
+.glow{
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top,#00ffff33,transparent 40%),
+radial-gradient(circle at bottom,#ff00ff33,transparent 40%);
+z-index:-1;
+}
+
 .box{
 background:#111827;
-padding:20px;
+padding:25px;
 border-radius:15px;
-box-shadow:0 0 20px #00ffff55;
-width:300px;
+box-shadow:0 0 25px #00ffff55;
+width:320px;
 text-align:center;
 }
 
 input{
 width:100%;
-padding:10px;
+padding:12px;
 margin-top:10px;
 border:none;
 border-radius:10px;
 outline:none;
+background:#0f172a;
+color:white;
 }
 
 button{
 margin-top:10px;
-padding:10px;
+padding:12px;
 width:100%;
 border:none;
 border-radius:10px;
 background:#00ffff;
-cursor:pointer;
 font-weight:bold;
+cursor:pointer;
+transition:0.3s;
 }
 
-#content{
+button:hover{
+transform:scale(1.05);
+}
+
+#app{
 display:none;
-padding:20px;
+width:90%;
+max-width:700px;
 }
 
-.script-box{
-background:#1f2937;
+.header{
+text-align:center;
+margin-bottom:20px;
+}
+
+.card{
+background:#111827;
 padding:15px;
-border-radius:10px;
-margin-top:10px;
+border-radius:15px;
+margin-bottom:10px;
+box-shadow:0 0 15px #00ffff33;
 white-space:pre-wrap;
+}
+
+.copy{
+background:#00ffff;
+color:black;
+margin-top:10px;
 }
 </style>
 
@@ -63,44 +95,67 @@ white-space:pre-wrap;
 
 <body>
 
-<div class="box" id="loginBox">
-<h2>🔐 Área Protegida</h2>
+<div class="glow"></div>
+
+<!-- LOGIN -->
+<div class="box" id="login">
+<h2>🔐 Script Vault</h2>
 <p>Digite a senha</p>
 
-<input type="password" id="senha" placeholder="Senha...">
-<button onclick="entrar()">Entrar</button>
+<input type="password" id="pass" placeholder="Senha...">
+<button onclick="login()">Entrar</button>
 
-<p id="erro" style="color:red;"></p>
+<p id="error" style="color:red;"></p>
 </div>
 
-<div id="content">
+<!-- APP -->
+<div id="app">
 
-<h1>🔥 Meus Scripts</h1>
-
-<div class="script-box">
-print("Olá mundo")
+<div class="header">
+<h1>⚡ Meus Scripts</h1>
 </div>
 
-<div class="script-box">
+<div class="card">
+print("Hello World - Script 1")
+<button class="copy" onclick="copyText(this)">Copiar</button>
+</div>
+
+<div class="card">
 local player = game.Players.LocalPlayer
 print(player.Name)
+<button class="copy" onclick="copyText(this)">Copiar</button>
+</div>
+
+<div class="card">
+function test()
+    print("Script 3 ativo")
+end
+<button class="copy" onclick="copyText(this)">Copiar</button>
 </div>
 
 </div>
 
 <script>
-const SENHA = "1234"; // 🔑 muda aqui sua senha
 
-function entrar(){
-let input = document.getElementById("senha").value;
+const SENHA = "GR16"; // 🔑 sua senha aqui
 
-if(input === SENHA){
-document.getElementById("loginBox").style.display = "none";
-document.getElementById("content").style.display = "block";
+function login(){
+let p = document.getElementById("pass").value;
+
+if(p === SENHA){
+document.getElementById("login").style.display = "none";
+document.getElementById("app").style.display = "block";
 }else{
-document.getElementById("erro").innerText = "Senha errada!";
+document.getElementById("error").innerText = "Senha errada!";
 }
 }
+
+function copyText(btn){
+let text = btn.parentElement.innerText.replace("Copiar","");
+navigator.clipboard.writeText(text);
+alert("Copiado!");
+}
+
 </script>
 
 </body>
